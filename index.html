@@ -138,7 +138,7 @@
 
                 <div class="mb-8">
                     <h4 class="font-semibold text-lg mb-1 text-center">문항 1: 생성형 AI 주요 사용 용도</h4>
-                    <p class="text-xs text-gray-500 text-center mb-3">(가장 많이 사용하는 용도 1가지 선택, N=18)</p>
+                    <p class="text-xs text-gray-500 text-center mb-3">(복수응답 가능, N=18)</p>
                     <div class="chart-container w-full max-w-3xl mx-auto chart-h-sm md:chart-h-md lg:chart-h-lg">
                         <canvas id="aiUsageChart"></canvas>
                     </div>
@@ -168,26 +168,51 @@
 
             <article class="info-card">
                 <h3 class="sub-section-title">2. 인터뷰 요약</h3>
-                <div class="grid md:grid-cols-2 gap-6">
-                    <div class="bg-teal-50 p-4 rounded-lg border-l-4 border-secondary-teal">
-                        <h4 class="font-semibold text-secondary-teal mb-2 text-lg">신수아 학생</h4>
-                        <ul class="list-disc list-inside space-y-1 text-gray-700 text-sm">
-                            <li>생성형 AI를 참고자료로 한정하며 자신의 말투와 맞지 않으면 직접 수정하여 사용한다.</li>
-                            <li>AI가 만든 결과를 그대로 사용하는 것에 대한 거부감이 있으며, 빠른 정답 제공이 오히려 성취감을 감소시킨다고 인식한다.</li>
-                        </ul>
+                <div class="grid md:grid-cols-1 lg:grid-cols-2 gap-8">
+                    <!-- 신수아 학생 인터뷰 -->
+                    <div class="bg-teal-50 p-4 rounded-lg border-l-4 border-secondary-teal flex flex-col">
+                        <div class="flex flex-col md:flex-row items-start gap-4 flex-grow">
+                             <!-- 이미지: 실제 경로 'src/KakaoTalk_20250610_145848464.jpg'로 수정 필요 -->
+                            <img src="src/KakaoTalk_20250610_145848464.jpg" 
+                                 alt="신수아 학생 인터뷰 사진" 
+                                 class="w-32 h-32 md:w-40 md:h-40 object-cover rounded-lg shadow-md flex-shrink-0 mx-auto md:mx-0">
+                            <div>
+                                <h4 class="font-semibold text-secondary-teal mb-2 text-lg">신수아 학생</h4>
+                                <ul class="list-disc list-inside space-y-1 text-gray-700 text-sm">
+                                    <li>생성형 AI를 참고자료로 한정하며 자신의 말투와 맞지 않으면 직접 수정하여 사용한다.</li>
+                                    <li>AI가 만든 결과를 그대로 사용하는 것에 대한 거부감이 있으며, 빠른 정답 제공이 오히려 성취감을 감소시킨다고 인식한다.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <h5 class="text-sm font-semibold text-gray-600 mb-2 text-center">인터뷰 워드클라우드</h5>
+                             <!-- 이미지: 실제 경로 'src/스크린샷 2025-06-10 145645.png'로 수정 필요 -->
+                            <img src="src/스크린샷 2025-06-10 145645.png" 
+                                 alt="신수아 학생 인터뷰 워드클라우드" 
+                                 class="w-full rounded-md shadow-lg object-contain">
+                        </div>
                     </div>
-                    <!-- 홍성재 학생 인터뷰 섹션 (이미지 추가됨) -->
-                    <div class="bg-teal-50 p-4 rounded-lg border-l-4 border-secondary-teal flex flex-col md:flex-row items-start gap-4">
-                        <!-- 이미지: 실제 경로로 수정 필요 -->
-                        <img src="src/스크린샷 2025-06-10 143427.png" 
-                             alt="홍성재 학생 인터뷰 사진" 
-                             class="w-24 h-24 md:w-32 md:h-32 object-cover rounded-lg shadow-md flex-shrink-0 mx-auto md:mx-0">
-                        <div>
-                            <h4 class="font-semibold text-secondary-teal mb-2 text-lg">홍성재 학생</h4>
-                            <ul class="list-disc list-inside space-y-1 text-gray-700 text-sm">
-                                <li>AI 사용 초기에 만족했으나, 자신의 실력과 AI 답변 사이의 괴리에서 혼란을 느꼈다.</li>
-                                <li>과제에 AI가 작성한 문장을 그대로 제출했다가 감점을 받은 경험을 통해, AI의 역할은 참고 수준에 머물러야 한다는 교훈을 얻었다.</li>
-                            </ul>
+                    <!-- 홍성재 학생 인터뷰 -->
+                    <div class="bg-teal-50 p-4 rounded-lg border-l-4 border-secondary-teal flex flex-col">
+                        <div class="flex flex-col md:flex-row items-start gap-4 flex-grow">
+                            <!-- 이미지: 실제 경로 'src/스크린샷 2025-06-10 143427.png'로 수정 필요 -->
+                            <img src="src/스크린샷 2025-06-10 143427.png" 
+                                 alt="홍성재 학생 인터뷰 사진" 
+                                 class="w-32 h-32 md:w-40 md:h-40 object-cover rounded-lg shadow-md flex-shrink-0 mx-auto md:mx-0">
+                            <div>
+                                <h4 class="font-semibold text-secondary-teal mb-2 text-lg">홍성재 학생</h4>
+                                <ul class="list-disc list-inside space-y-1 text-gray-700 text-sm">
+                                    <li>AI 사용 초기에 만족했으나, 자신의 실력과 AI 답변 사이의 괴리에서 혼란을 느꼈다.</li>
+                                    <li>과제에 AI가 작성한 문장을 그대로 제출했다가 감점을 받은 경험을 통해, AI의 역할은 참고 수준에 머물러야 한다는 교훈을 얻었다.</li>
+                                </ul>
+                            </div>
+                        </div>
+                         <div class="mt-4">
+                            <h5 class="text-sm font-semibold text-gray-600 mb-2 text-center">인터뷰 워드클라우드</h5>
+                             <!-- 이미지: 실제 경로 'src/스크린샷 2025-06-10 145657.png'로 수정 필요 -->
+                            <img src="src/스크린샷 2025-06-10 145657.png" 
+                                 alt="홍성재 학생 인터뷰 워드클라우드" 
+                                 class="w-full rounded-md shadow-lg object-contain">
                         </div>
                     </div>
                 </div>
@@ -209,262 +234,4 @@
                     <ul class="custom-list space-y-1 text-sm">
                         <li>대부분의 학생이 AI의 오류 가능성을 인식하고 비판적으로 활용하고 있었다.</li>
                         <li>AI 사용이 학생의 자아 표현 및 감정 상태에 영향을 미칠 수 있음이 드러났다.</li>
-                        <li>생성형 AI는 단순한 생산 도구가 아닌, 사고와 정체성 형성에 영향을 주는 인지적 조력자로 작용하고 있다.</li>
-                    </ul>
-                </div>
-                <div>
-                    <h3 class="text-lg font-semibold text-secondary-teal mb-2">제언 및 다짐</h3>
-                    <ul class="custom-list space-y-1 text-sm">
-                        <li>AI 활용 교육은 단순한 사용법 중심이 아니라, 정보 검증, 표절 방지, 정체성 확립, 심리적 안정까지 아우르는 통합적 리터러시 교육으로 확장되어야 한다.</li>
-                        <li>향후에는 교사와 학생이 함께 AI 활용 가이드라인을 마련하고, 실습과 토론 중심의 교육 프로그램을 구축할 필요가 있다.</li>
-                        <li>학생으로서 나는 AI를 단순한 복사 도구가 아닌, 나의 사고를 자극하고 도와주는 조력자로 사용할 것이다. 매 순간 내가 주체가 되어 기술을 활용하는 능동적 학습자가 되기를 다짐한다.</li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
-        <section id="references" class="info-card">
-            <h2 class="section-title">Ⅵ. 참고 자료</h2>
-            <ul class="list-disc list-inside text-sm space-y-1">
-                <li>Google Forms 설문조사 결과 (2025.05.12~16)</li>
-                <li>ChatGPT 활용 질의 응답 이력</li>
-                <li>ClovaNote 인터뷰 녹취 및 정리 자료</li>
-                <li>김형주(2024), 「AI와 교육 윤리」, 한국교육정보연구소 논문집</li>
-            </ul>
-        </section>
-    </main>
-
-    <footer class="bg-gray-700 text-white text-center p-6 mt-12 rounded-t-lg">
-        <p>&copy; 2025 미림마이스터고등학교 1학년 4반 3조. All rights reserved.</p>
-        <p class="text-sm text-gray-400 mt-1">본 인포그래픽은 제공된 보고서 내용을 기반으로 AI에 의해 생성되었습니다.</p>
-    </footer>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const primaryBlue = '#2A62B6';
-            const secondaryTeal = '#4ECDC4';
-            const accentGrey = '#A9A9A9';
-            const supportingLightBlue = '#E0F2FE';
-            const darkText = '#263238';
-
-            const commonChartOptions = {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        position: 'top',
-                        labels: {
-                            color: darkText,
-                            font: { size: 12, family: 'Pretendard' }
-                        }
-                    },
-                    tooltip: {
-                        backgroundColor: 'rgba(0,0,0,0.7)',
-                        titleColor: '#fff',
-                        bodyColor: '#fff',
-                        callbacks: {
-                            label: function(context) {
-                                let label = context.dataset.label || '';
-                                if (label) {
-                                    label += ': ';
-                                }
-                                if (context.parsed.y !== null) {
-                                    label += context.parsed.y + (context.dataset.yAxisID === 'percentageAxis' ? '%' : '명');
-                                }
-                                return label;
-                            }
-                        }
-                    }
-                },
-                scales: {
-                    x: {
-                        ticks: {
-                            color: darkText,
-                            font: { size: 11, family: 'Pretendard' },
-                            maxRotation: 45,
-                            minRotation: 0
-                        },
-                        grid: { display: false }
-                    },
-                    y: {
-                        beginAtZero: true,
-                        ticks: {
-                            color: darkText,
-                            font: { size: 11, family: 'Pretendard' },
-                            callback: function(value) { return value + '명' }
-                        },
-                        grid: { color: '#e0e0e0' }
-                    }
-                }
-            };
-            
-            const commonPieChartOptions = {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        position: 'bottom',
-                        labels: {
-                            color: darkText,
-                            font: { size: 12, family: 'Pretendard' },
-                            padding: 15,
-                             boxWidth: 15,
-                        }
-                    },
-                    tooltip: {
-                        callbacks: {
-                            label: function(context) {
-                                let label = context.label || '';
-                                if (label) {
-                                    label += ': ';
-                                }
-                                if (context.parsed !== null) {
-                                    label += context.parsed + '% (' + context.dataset.dataCounts[context.dataIndex] + '명)';
-                                }
-                                return label;
-                            }
-                        }
-                    }
-                }
-            };
-
-
-            // Chart 1: AI Usage Purposes
-            const aiUsageCtx = document.getElementById('aiUsageChart').getContext('2d');
-            new Chart(aiUsageCtx, {
-                type: 'bar',
-                data: {
-                    labels: [
-                        '학습 자료 찾기 및 이해\n(개념 설명, 요약 등)', 
-                        '코딩 관련 도움', 
-                        '아이디어 얻기\n(창작, 기획 등)', 
-                        '글쓰기 또는 글 다듬기\n(보고서 초안, 이메일 등)',
-                        '이미지 만들기',
-                        '번역',
-                        '고민 말하기'
-                    ],
-                    datasets: [{
-                        label: '응답자 수 (명)',
-                        data: [10, 9, 8, 6, 4, 3, 3],
-                        backgroundColor: [
-                            'rgba(42, 98, 182, 0.7)', // Primary Blue
-                            'rgba(78, 205, 196, 0.7)', // Secondary Teal
-                            'rgba(169, 169, 169, 0.7)', // Accent Grey
-                            'rgba(42, 98, 182, 0.5)', 
-                            'rgba(78, 205, 196, 0.5)',
-                            'rgba(169, 169, 169, 0.5)',
-                            'rgba(42, 98, 182, 0.3)'
-                        ],
-                        borderColor: [
-                            primaryBlue,
-                            secondaryTeal,
-                            accentGrey,
-                            primaryBlue,
-                            secondaryTeal,
-                            accentGrey,
-                            primaryBlue
-                        ],
-                        borderWidth: 1
-                    }]
-                },
-                options: { ...commonChartOptions, 
-                    scales: { ...commonChartOptions.scales, 
-                        x: { ...commonChartOptions.scales.x, ticks: {...commonChartOptions.scales.x.ticks, autoSkip: false}} 
-                    } 
-                }
-            });
-
-            // Chart 2: Error Awareness
-            const errorAwarenessCtx = document.getElementById('errorAwarenessChart').getContext('2d');
-            const errorAwarenessData = {
-                labels: ['전혀 인식 못함', '인식 못함', '보통', '인식함', '잘 인식함'],
-                datasets: [{
-                    label: '응답자 수 (명)',
-                    data: [0, 1, 6, 6, 5], // 명
-                    dataCounts: [0, 1, 6, 6, 5],
-                    backgroundColor: [
-                        '#FF6384',
-                        '#FF9F40',
-                        '#FFCD56',
-                        '#4BC0C0',
-                        '#36A2EB'
-                    ],
-                    borderColor: '#fff',
-                    borderWidth: 1
-                }]
-            };
-            new Chart(errorAwarenessCtx, {
-                type: 'pie',
-                data: errorAwarenessData,
-                options: { ...commonPieChartOptions,
-                    plugins: { ...commonPieChartOptions.plugins, 
-                        tooltip: {
-                             ...commonPieChartOptions.plugins.tooltip,
-                            callbacks: {
-                                label: function(context) {
-                                    let label = context.label || '';
-                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
-                                    const percentage = total > 0 ? (context.parsed / total * 100).toFixed(1) : 0;
-                                    if (label) {
-                                        label += ': ';
-                                    }
-                                    if (context.parsed !== null) {
-                                        label += context.parsed + '명 (' + percentage + '%)';
-                                    }
-                                    return label;
-                                }
-                            }
-                        }
-                    }
-                }
-            });
-
-            // Chart 3: Fact-Checking Frequency
-            const factCheckingCtx = document.getElementById('factCheckingChart').getContext('2d');
-            const factCheckingData = {
-                labels: ['전혀 확인 안함', '별로 확인 안함', '보통', '가끔 확인', '항상 확인'],
-                datasets: [{
-                    label: '응답자 수 (명)',
-                    data: [1, 1, 5, 9, 2], // 명
-                    dataCounts: [1, 1, 5, 9, 2],
-                    backgroundColor: [
-                        '#FF6384',
-                        '#FF9F40',
-                        '#FFCD56',
-                        '#4BC0C0',
-                        '#36A2EB'
-                    ],
-                    borderColor: '#fff',
-                    borderWidth: 1
-                }]
-            };
-            new Chart(factCheckingCtx, {
-                type: 'pie',
-                data: factCheckingData,
-                 options: { ...commonPieChartOptions,
-                    plugins: { ...commonPieChartOptions.plugins, 
-                        tooltip: {
-                             ...commonPieChartOptions.plugins.tooltip,
-                            callbacks: {
-                                label: function(context) {
-                                    let label = context.label || '';
-                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
-                                    const percentage = total > 0 ? (context.parsed / total * 100).toFixed(1) : 0;
-                                    if (label) {
-                                        label += ': ';
-                                    }
-                                    if (context.parsed !== null) {
-                                        label += context.parsed + '명 (' + percentage + '%)';
-                                    }
-                                    return label;
-                                }
-                            }
-                        }
-                    }
-                }
-            });
-        });
-    </script>
-    <!-- 인포그래픽 생성 완료. 모든 스크립트 및 스타일은 이 HTML 파일 내에 포함되어 있습니다. -->
-</body>
-</html>
+                        <li>생성형 AI는 단순한 생산 도구가 아닌, 사고와
