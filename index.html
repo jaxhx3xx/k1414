@@ -13,7 +13,7 @@
             font-family: 'Pretendard', sans-serif;
             background-color: #FFF8E1; /* 연한 노랑 배경 */
             color: #263238;
-            font-size: 1.125rem; /* 약 18px (기존 19px에서 1pt 줄임) */
+            font-size: 1.125rem; /* 약 18px (조금 더 키움) */
         }
         p, li {
             font-size: 1.125rem; /* 모든 p와 li 태그의 폰트 크기를 body와 동일하게 설정하여 일관성 유지 */
@@ -60,45 +60,45 @@
             align-items: center; /* 항상 가운데 정렬 */
         }
 
-        /* 인터뷰 사진과 텍스트를 담는 컨테이너 (새로운 구조) */
+        /* 인터뷰 사진과 텍스트를 담는 컨테이너 */
         .interview-main-content {
             display: flex;
-            flex-direction: column; /* 사진-내용-워드클라우드 순서 */
-            align-items: center;
+            flex-direction: column; /* 모바일: 사진 -> 내용 */
             width: 100%;
-            /* margin-bottom: 1rem; */ /* 워드클라우드와의 간격은 이미지 자체의 margin-top으로 처리 */
+            align-items: center; /* 모바일: 중앙 정렬 */
+            gap: 1rem; /* 모바일에서 사진-내용 간격 */
         }
         
-        .interview-photo-container {
-            width: 100%; /* 사진이 컨테이너 너비를 꽉 채우도록 */
+        .interview-photo-wrapper {
+            flex-shrink: 0; /* 사진 크기 고정 */
+            width: 100%; /* 모바일에서 꽉 채움 */
             display: flex;
-            justify-content: center; /* 사진을 중앙 정렬 */
-            margin-bottom: 1rem; /* 사진과 내용 사이 간격 */
+            justify-content: center; /* 모바일 중앙 정렬 */
         }
 
         .interview-photo {
             width: 100%; /* 부모 너비에 맞춰 꽉 채움 */
             height: auto; /* 비율 유지 */
-            max-width: 400px; /* 적당한 최대 사이즈 (조절 가능) */
+            max-width: 300px; /* 모바일 최대 사이즈 */
             object-fit: cover;
             border-radius: .5rem;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
 
         .interview-text-content {
+            flex-grow: 1; /* 남은 공간을 채움 */
             width: 100%; /* 텍스트 내용 너비 꽉 채움 */
             text-align: left; /* 텍스트는 왼쪽 정렬 */
             display: flex;
             flex-direction: column;
             gap: 0.5rem; /* 내부 텍스트 줄 간격 */
-            margin-top: 1rem; /* 사진 아래 텍스트 시작 간격 */
         }
 
         .student-name {
             display: flex;
             align-items: center;
-            justify-content: center; /* 이름도 중앙 정렬 */
-            margin-bottom: 1rem;
+            justify-content: center; /* 모바일에서 이름 가운데 정렬 */
+            margin-bottom: 0.5rem; /* 이름과 주제 사이 간격 */
         }
 
         .student-name h4 {
@@ -109,7 +109,7 @@
         .word-cloud-image {
             width: 100%; /* 가로 공간을 꽉 채움 */
             height: auto;
-            max-width: 600px; /* 너무 커지지 않도록 최대 너비 설정 (인포카드 내에서 꽉 차게 보임) */
+            /* max-width: 600px;  이 제한을 제거하여 부모 너비에 맞춤 */
             object-fit: contain;
             border-radius: .5rem;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
@@ -124,16 +124,31 @@
             font-size: 0.9375rem; /* 약 15px */
         }
 
-        /* 데스크톱 (768px 이상)에서도 세로 정렬 유지 */
+        /* 데스크톱 (768px 이상) 반응형 */
         @media (min-width: 768px) {
             .interview-main-content {
-                flex-direction: column; /* 데스크톱에서도 세로 정렬 유지 */
+                flex-direction: row; /* 데스크톱: 사진과 내용을 가로로 나란히 */
+                align-items: flex-start; /* 상단 정렬 (내용이 길어질 때 사진이 하단에 정렬되지 않도록) */
+                justify-content: space-between; /* 사진과 내용 사이 공간을 최대한 활용 */
+                gap: 2rem; /* 사진과 내용 사이 간격 */
             }
-            .interview-photo-container {
-                margin-bottom: 1rem; /* 사진과 내용 사이 간격 */
+            .interview-photo-wrapper {
+                width: 50%; /* 사진 래퍼가 절반 너비를 차지 */
+                max-width: 50%; /* 50%를 넘지 않도록 */
+                height: auto; /* 이미지 높이는 자동으로 */
+                justify-content: flex-start; /* 사진을 왼쪽으로 정렬 */
+                display: flex; /* 내부 이미지를 정렬하기 위해 flex 컨테이너로 설정 */
+                align-items: flex-start; /* 이미지를 상단에 붙임 */
             }
             .interview-photo {
-                max-width: 350px; /* 데스크톱에서 사진 최대 너비 */
+                width: 100%; /* 래퍼의 100%를 채움 */
+                height: auto; /* 텍스트 높이에 비례하도록 auto 설정 */
+                object-fit: contain; /* 비율 유지하며 포함하도록 변경 */
+                max-width: none; /* 데스크톱에서 max-width 제한 해제 */
+            }
+            .interview-text-content {
+                width: 50%; /* 텍스트 내용이 절반 너비를 차지 */
+                margin-top: 0; /* 행 레이아웃에서는 상단 여백 제거 */
             }
             .student-name {
                 justify-content: flex-start; /* 데스크톱에서는 이름 왼쪽 정렬 */
@@ -177,8 +192,8 @@
         <div class="grid md:grid-cols-2 gap-6">
             <div class="bg-supporting-light-yellow p-4 rounded-md"><h3 class="font-semibold text-primary-yellow mb-1"><span class="research-emoji">🗓️</span> 조사 기간</h3><p>2025년 5월 12일 (월) ~ 5월 16일 (금)</p></div>
             <div class="bg-supporting-light-yellow p-4 rounded-md"><h3 class="font-semibold text-primary-yellow mb-1"><span class="research-emoji">🧑‍🎓</span> 조사 대상</h3><p>서울 미림마이스터고등학교 소프트웨어과 1학년 4반 학생 18명 <br>(남 10명, 여 8명, <strong class="text-secondary-orange">신수아, 홍성재 학생 인터뷰 참여</strong>)</p></div>
-            <div class="bg-supporting-light-yellow p-4 rounded-md"><h3 class="font-semibold text-primary-yellow mb-1"><span class="research-emoji">📊🗣️</span> 조사 방법</h3><p>양적 설문조사와 질적 인터뷰 병행</p></div>
-            <div class="bg-supporting-light-yellow p-4 rounded-md"><h3 class="font-semibold text-primary-yellow mb-1"><span class="research-emoji">📝🎤</span> 설문 및 인터뷰 설계</h3><p>설문: Google Forms (5점 척도/8문항)</p><p>인터뷰: ClovaNote 사용, 개별 심층 인터뷰(2명)</p></div>
+            <div class="bg-supporting-light-yellow p-4 rounded-md"><h3 class="font-semibold text-primary-yellow mb-1"><span class="research-emoji">📊</span> 조사 방법</h3><p>양적 설문조사와 질적 인터뷰 병행</p></div>
+            <div class="bg-supporting-light-yellow p-4 rounded-md"><h3 class="font-semibold text-primary-yellow mb-1"><span class="research-emoji">📝</span> 설문 및 인터뷰 설계</h3><p>설문: Google Forms (5점 척도/8문항)</p><p>인터뷰: ClovaNote 사용, 개별 심층 인터뷰(2명)</p></div>
         </div>
     </section>
 
@@ -226,46 +241,50 @@
             <div class="space-y-8">
                 <!-- 신수아 학생 인터뷰 -->
                 <div class="interview-card">
-                    <div class="interview-photo-container">
-                        <img src="src/수아하윤인터뷰.jpg" onerror="this.onerror=null; this.src='https://placehold.co/400x400/FF9800/FFFFFF?text=신수아+학생+인터뷰';" alt="신수아 학생 인터뷰 사진" class="interview-photo">
-                    </div>
-                    <div class="interview-text-content space-y-4">
-                        <div class="student-name"><h4 class="font-bold text-xl text-secondary-orange">신수아</h4></div>
-                        <div>
-                            <p class="font-semibold text-gray-800">주제: AI 활용에 대한 감정적 거리감과 윤리적 태도</p>
-                            <p class="text-sm text-gray-600 mt-1"><strong class="font-semibold">핵심 키워드:</strong> 허무함, 괴리감, 베끼기, 실력, 비리, 말투, 수정, 참고</p>
+                    <div class="interview-main-content">
+                        <div class="interview-photo-wrapper">
+                            <img src="src/수아하윤인터뷰.jpg" onerror="this.onerror=null; this.src='https://placehold.co/400x400/FF9800/FFFFFF?text=신수아+학생+인터뷰';" alt="신수아 학생 인터뷰 사진" class="interview-photo">
                         </div>
-                        <div>
-                            <p class="font-semibold text-gray-800"> 요약:</p>
-                            <ul class="list-disc list-inside text-gray-700 mt-1 space-y-1">
-                                <li>AI의 빠른 정답 제시에 허무함과 ‘내 작업이 아니다’는 괴리감을 느낀다.</li>
-                                <li>유료 AI 서비스로 점수를 얻는 건 ‘비리’처럼 느껴져 거부감을 갖는다.</li>
-                                <li>AI의 어색한 말투 때문에 문장을 직접 수정하거나 제외하기도 한다.</li>
-                                <li>AI는 참고만 하고, 최종 결과물은 스스로 만들려는 태도를 지닌다.</li>
-                            </ul>
+                        <div class="interview-text-content space-y-4">
+                            <div class="student-name"><h4 class="font-bold text-xl text-secondary-orange">신수아</h4></div>
+                            <div>
+                                <p class="font-semibold text-gray-800">주제: AI 활용에 대한 감정적 거리감과 윤리적 태도</p>
+                                <p class="text-sm text-gray-600 mt-1"><strong class="font-semibold">핵심 키워드:</strong> 허무함, 괴리감, 베끼기, 실력, 비리, 말투, 수정, 참고</p>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-gray-800"> 요약:</p>
+                                <ul class="list-disc list-inside text-gray-700 mt-1 space-y-1">
+                                    <li>AI의 빠른 정답 제시에 허무함과 ‘내 작업이 아니다’는 괴리감을 느낀다.</li>
+                                    <li>유료 AI 서비스로 점수를 얻는 건 ‘비리’처럼 느껴져 거부감을 갖는다.</li>
+                                    <li>AI의 어색한 말투 때문에 문장을 직접 수정하거나 제외하기도 한다.</li>
+                                    <li>AI는 참고만 하고, 최종 결과물은 스스로 만들려는 태도를 지닌다.</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                     <img src="src/스크린샷 2025-06-10 145645.png" onerror="this.onerror=null; this.src='https://placehold.co/600x350/FFB44E/FFFFFF?text=신수아+워드클라우드';" alt="신수아 워드클라우드" class="word-cloud-image">
                 </div>
                 <!-- 홍성재 학생 인터뷰 -->
                 <div class="interview-card">
-                    <div class="interview-photo-container">
-                        <img src="src/성재인터뷰.jpg" onerror="this.onerror=null; this.src='https://placehold.co/400x400/FF9800/FFFFFF?text=홍성재+학생+인터뷰';" alt="홍성재 학생 인터뷰 사진" class="interview-photo">
-                    </div>
-                    <div class="interview-text-content space-y-4">
-                        <div class="student-name"><h4 class="font-bold text-xl text-secondary-orange">🧑‍🎓 홍성재</h4></div>
-                        <div>
-                            <p class="font-semibold text-gray-800">주제: AI 사용 후의 자기 주도성과 감정적 영향</p>
-                            <p class="text-sm text-gray-600 mt-1"><strong class="font-semibold">핵심 키워드:</strong> 참고, 과제, 무력감, 자존감, 수정, 점수 하락, 인간 vs AI</p>
+                    <div class="interview-main-content">
+                        <div class="interview-photo-wrapper">
+                            <img src="src/성재인터뷰.jpg" onerror="this.onerror=null; this.src='https://placehold.co/400x400/FF9800/FFFFFF?text=홍성재+학생+인터뷰';" alt="홍성재 학생 인터뷰 사진" class="interview-photo">
                         </div>
-                        <div>
-                            <p class="font-semibold text-gray-800">요약:</p>
-                            <ul class="list-disc list-inside text-gray-700 mt-1 space-y-1">
-                                <li>AI를 참고하되 결과물은 직접 만들려 노력한다.</li>
-                                <li>과제를 끝냈을 땐 기쁘지만, 자기 주도성 부족에 대한 무력감도 있었다.</li>
-                                <li>AI 문체를 수정했지만 점수가 낮아지는 부작용을 겪었다.</li>
-                                <li>AI와 자신을 비교하며 <strong class="text-accent-blue">자존감이나 정체성에 영향</strong>을 받거나 흔들리는 감정도 경험했다.</li>
-                            </ul>
+                        <div class="interview-text-content space-y-4">
+                            <div class="student-name"><h4 class="font-bold text-xl text-secondary-orange">홍성재</h4></div>
+                            <div>
+                                <p class="font-semibold text-gray-800">주제: AI 사용 후의 자기 주도성과 감정적 영향</p>
+                                <p class="text-sm text-gray-600 mt-1"><strong class="font-semibold">핵심 키워드:</strong> 참고, 과제, 무력감, 자존감, 수정, 점수 하락, 인간 vs AI</p>
+                            </div>
+                            <div>
+                                <p class="font-semibold text-gray-800">요약:</p>
+                                <ul class="list-disc list-inside text-gray-700 mt-1 space-y-1">
+                                    <li>AI를 참고하되 결과물은 직접 만들려 노력한다.</li>
+                                    <li>과제를 끝냈을 땐 기쁘지만, 자기 주도성 부족에 대한 무력감도 있었다.</li>
+                                    <li>AI 문체를 수정했지만 점수가 낮아지는 부작용을 겪었다.</li>
+                                    <li>AI와 자신을 비교하며 <strong class="text-accent-blue">자존감이나 정체성에 영향</strong>을 받거나 흔들리는 감정도 경험했다.</li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                     <img src="src/스크린샷 2025-06-10 145657.png" onerror="this.onerror=null; this.src='https://placehold.co/600x350/FFB44E/FFFFFF?text=홍성재+워드클라우드';" alt="홍성재 워드클라우드" class="word-cloud-image">
@@ -348,13 +367,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 label: '응답 수',
                 data: [10, 9, 8, 6, 4, 3, 3],
                 backgroundColor: [
-                    '#6A0572', // 보라
-                    '#AB3064', // 자홍
-                    '#E16F4F', // 주황
-                    '#FFB44E', // 밝은 오렌지
-                    '#2E8B57', // 바다 녹색
-                    '#4682B4', // 스틸 블루
-                    '#C0C0C0'  // 회색
+                    '#4A90E2', // 밝은 파랑
+                    '#50E3C2', // 민트
+                    '#7ED321', // 연두
+                    '#F5A623', // 주황
+                    '#BD10E0', // 보라
+                    '#9B59B6', // 연보라
+                    '#4A4A4A'  // 진회색
                 ]
             }]
         },
@@ -370,10 +389,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 data: [0, 1, 6, 6, 5],
                 backgroundColor: [
                     '#FF6347', // 토마토
-                    '#FFD700', // 골드
-                    '#4682B4', // 스틸 블루
-                    '#3CB371', // 미디엄 씨 그린
-                    '#6A5ACD'  // 슬레이트 블루
+                    '#4A90E2', // 밝은 파랑
+                    '#50E3C2', // 민트
+                    '#7ED321', // 연두
+                    '#BD10E0'  // 보라
                 ]
             }]
         },
@@ -389,10 +408,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 data: [1, 1, 5, 9, 2],
                 backgroundColor: [
                     '#FF4500', // 오렌지 레드
-                    '#FF8C00', // 다크 오렌지
-                    '#DAA520', // 골든 로드
-                    '#1E90FF', // 도저 블루
-                    '#32CD32'  // 라임 그린
+                    '#4A90E2', // 밝은 파랑
+                    '#50E3C2', // 민트
+                    '#7ED321', // 연두
+                    '#BD10E0'  // 보라
                 ]
             }]
         },
