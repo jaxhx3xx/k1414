@@ -23,7 +23,6 @@
         .text-primary-yellow { color: #FFC107; } /* 주황빛 노랑 텍스트 */
         .bg-secondary-orange { background-color: #FF9800; } /* 진한 오렌지 */
         .text-secondary-orange { color: #FF9800; } /* 진한 오렌지 텍스트 */
-        .bg-supporting-light-yellow { background-color: #FFF9C4; } /* 보조 연노랑 */
         .text-dark-text { color: #263238; }
         .info-card { background-color: #FFF; border-radius: .5rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1); padding: 1.5rem; }
         /* 섹션 제목 스타일 변경 */
@@ -34,9 +33,14 @@
         .chart-h-sm { height: 280px; } /* 조금 줄여서 한 줄에 더 잘 들어가도록 조정 */
         @media (min-width:768px) { .chart-h-md { height: 350px; } }
         @media (min-width:1024px) { .chart-h-lg { height: 400px; } }
-        /* 체크리스트 아이콘 색상 변경 */
+        
+        /* 발견점 리스트 아이콘 (체크) */
         .custom-list li { padding-left:1.5em; position:relative; }
         .custom-list li::before { content:"✓"; color:#FF9800; font-weight:bold; position:absolute; left:0; } /* 오렌지색 체크 아이콘 */
+
+        /* 제언 및 다짐 리스트 아이콘 (전구) */
+        .pledge-list li { padding-left: 1.5em; position: relative; }
+        .pledge-list li::before { content: "💡"; position: absolute; left: 0; }
 
         /* 조사 계획 이모티콘 크기 - 더 크게 강조 */
         .research-emoji {
@@ -197,174 +201,227 @@
             display: flex;
             flex-direction: column;
             gap: 0.5rem;
-    
+        }
+
+        /* 시작 페이지 스타일 */
+        #start-page {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #FFF8E1; /* body 배경과 동일 */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000; /* 최상단에 위치 */
+            text-align: center;
+            color: #263238;
+        }
+        #start-page h1 {
+            font-size: 3rem; /* 더 큰 제목 */
+            font-weight: bold;
+            color: #FF9800; /* 진한 오렌지 색상 */
+            margin-bottom: 1.5rem;
+        }
+        #start-page p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: #FFC107; /* 주황빛 노랑 텍스트 */
+        }
+        #start-page button {
+            background-color: #FF9800; /* 진한 오렌지색 버튼 */
+            color: white;
+            padding: 1rem 2rem;
+            font-size: 1.25rem;
+            border-radius: 9999px; /* 둥근 버튼 */
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        #start-page button:hover {
+            background-color: #F57C00; /* 호버 시 더 진한 오렌지 */
+            transform: translateY(-2px);
+        }
+        #main-content {
+            display: none; /* 초기에는 숨김 */
         }
     </style>
 </head>
 <body class="text-dark-text">
 
-<header class="bg-primary-yellow text-white py-8 px-4 md:px-8 text-center rounded-b-lg shadow-lg">
-    <h1 class="text-3xl md:text-4xl font-bold mb-2">생성형 AI를 똑똑하고 바르게 활용하는 방법</h1>
-    <p class="text-lg md:text-xl">미림마이스터고등학교 1학년 4반 3조 (1401 강하윤, 1404 김기범, 1409 박주혁, 1414 정재희)</p>
-    <p class="text-base mt-1">조사 보고서 기반 인포그래픽 (작성일: 2025년 6월)</p>
-</header>
+<!-- 시작 페이지 -->
+<div id="start-page">
+    <h1>생성형 AI를 똑똑하고 바르게 활용하는 방법</h1>
+    <p>미림마이스터고등학교 1학년 4반 3조</p>
+    <button id="startButton">인포그래픽 보기</button>
+</div>
 
-<main class="container mx-auto p-4 md:p-8 space-y-12">
+<!-- 메인 인포그래픽 콘텐츠 (초기에는 숨겨짐) -->
+<div id="main-content">
+    <header class="bg-primary-yellow text-white py-8 px-4 md:px-8 text-center rounded-b-lg shadow-lg">
+        <h1 class="text-3xl md:text-4xl font-bold mb-2">생성형 AI를 똑똑하고 바르게 활용하는 방법</h1>
+        <p class="text-lg md:text-xl">미림마이스터고등학교 1학년 4반 3조 (1401 강하윤, 1404 김기범, 1409 박주혁, 1414 정재희)</p>
+        <p class="text-base mt-1">조사 보고서 기반 인포그래픽 (작성일: 2025년 6월)</p>
+    </header>
 
-    <section id="motivation" class="info-card">
-        <h2 class="section-title">Ⅰ-1. 조사 동기</h2>
-        <p>우리 반 친구들이 생성형 AI를 얼마나, 그리고 어떻게 사용하고 있는지 궁금했다. 막연하게 '많이 쓰겠지'라고 생각했지만, 실제로 어떤 용도로, 어떤 AI 도구를 주로 사용하는지에 대한 구체적인 정보는 부족했다. 이 조사를 통해 친구들의 <strong class="text-accent-blue">AI 활용 실태를 파악</strong>하고, 이를 바탕으로 더 <strong class="text-accent-blue">효율적이고 책임감 있는 AI 사용 문화</strong>를 만들어가는 데 기여하고 싶었다.</p>
-    </section>
+    <main class="container mx-auto p-4 md:p-8 space-y-12">
 
-    <section id="purpose" class="info-card">
-        <h2 class="section-title">Ⅰ-2. 조사 목적</h2>
-        <p>본 조사는 1학년 4반 학생들의 <strong class="text-accent-blue">생성형 AI 사용 현황을 면밀히 파악</strong>하는 데 목적이 있다. 학생들의 주된 AI 활용 목적, 빈도, 그리고 선호하는 AI 도구를 분석하여 데이터를 기반으로 한 이해를 높이고자 한다. 궁극적으로 이 보고서는 학생들이 생성형 AI를 더욱 <strong class="text-accent-blue">똑똑하고 올바르게 활용할 수 있는 실질적인 가이드라인</strong>을 제시하여, 학습 및 일상생활에서의 <strong class="text-accent-blue">긍정적인 변화를 이끌어내는 데 기여</strong>할 것이다.</p>
-    </section>
+        <section id="motivation" class="info-card">
+            <h2 class="section-title">Ⅰ-1. 조사 동기</h2>
+            <p>우리 반 친구들이 생성형 AI를 얼마나, 그리고 어떻게 사용하고 있는지 궁금했다. 막연하게 '많이 쓰겠지'라고 생각했지만, 실제로 어떤 용도로, 어떤 AI 도구를 주로 사용하는지에 대한 구체적인 정보는 부족했다. 이 조사를 통해 친구들의 <strong class="text-accent-blue">AI 활용 실태를 파악</strong>하고, 이를 바탕으로 더 <strong class="text-accent-blue">효율적이고 책임감 있는 AI 사용 문화</strong>를 만들어가는 데 기여하고 싶었다.</p>
+        </section>
 
-    <section id="research-plan" class="info-card">
-        <h2 class="section-title">Ⅱ. 조사 계획</h2>
-        <div class="grid md:grid-cols-2 gap-6">
-            <div class="bg-supporting-light-yellow p-4 rounded-md"><h3 class="font-semibold text-primary-yellow mb-1"><span class="research-emoji">🗓️</span> 조사 기간</h3><p>2025년 5월 12일 (월) ~ 5월 16일 (금)</p></div>
-            <div class="bg-supporting-light-yellow p-4 rounded-md"><h3 class="font-semibold text-primary-yellow mb-1"><span class="research-emoji">🧑‍🎓</span> 조사 대상</h3><p>서울 미림마이스터고등학교 소프트웨어과 1학년 4반 학생 18명 <br>(남 10명, 여 8명, <strong class="text-secondary-orange">신수아, 홍성재 학생 인터뷰 참여</strong>)</p></div>
-            <div class="bg-supporting-light-yellow p-4 rounded-md"><h3 class="font-semibold text-primary-yellow mb-1"><span class="research-emoji">📊</span> 조사 방법</h3><p>양적 설문조사와 질적 인터뷰 병행</p></div>
-            <div class="bg-supporting-light-yellow p-4 rounded-md"><h3 class="font-semibold text-primary-yellow mb-1"><span class="research-emoji">📝</span> 설문 및 인터뷰 설계</h3><p>설문: Google Forms (5점 척도/8문항)</p><p>인터뷰: ClovaNote 사용, 개별 심층 인터뷰(2명)</p></div>
-        </div>
-    </section>
+        <section id="purpose" class="info-card">
+            <h2 class="section-title">Ⅰ-2. 조사 목적</h2>
+            <p>본 조사는 1학년 4반 학생들의 <strong class="text-accent-blue">생성형 AI 사용 현황을 면밀히 파악</strong>하는 데 목적이 있다. 학생들의 주된 AI 활용 목적, 빈도, 그리고 선호하는 AI 도구를 분석하여 데이터를 기반으로 한 이해를 높이고자 한다. 궁극적으로 이 보고서는 학생들이 생성형 AI를 더욱 <strong class="text-accent-blue">똑똑하고 올바르게 활용할 수 있는 실질적인 가이드라인</strong>을 제시하여, 학습 및 일상생활에서의 <strong class="text-accent-blue">긍정적인 변화를 이끌어내는 데 기여</strong>할 것이다.</p>
+        </section>
 
-    <section id="research-results" class="space-y-8">
-        <h2 class="text-3xl font-bold text-center text-primary-yellow mb-8">Ⅲ. 조사 결과</h2>
-        <article class="info-card">
-            <h3 class="sub-section-title">1. 설문조사 분석</h3>
-            <p class="mb-6">총 18명 대상 설문</p>
-            
-            <div class="survey-charts-grid"> <!-- 가로 나열을 위한 새로운 클래스 -->
-                <!-- 문항 1: AI Usage -->
-                <div class="flex flex-col items-center text-center">
-                    <h4 class="font-semibold text-lg mb-1">문항 1: 생성형 AI 주요 사용 용도</h4>
-                    <p class="text-xs text-gray-500 mb-3">(복수응답, N=18)</p>
-                    <div class="chart-container w-full chart-h-sm"> 
-                        <canvas id="aiUsageChart" role="img" aria-label="AI 사용 용도 설문 차트"></canvas>
-                    </div>
-                    <p class="mt-3 text-sm text-gray-700"><strong>결과:</strong> 학습자료 이해(55.6%) 가장 높고, 코딩 도움(50%), 아이디어(44.4%) 순.</p>
-                </div>
-
-                <!-- 문항 2: Error Awareness -->
-                <div class="flex flex-col items-center text-center">
-                    <h4 class="font-semibold text-lg mb-1">문항 2: AI 오류 인식</h4>
-                    <p class="text-xs text-gray-500 mb-3">(N=18)</p>
-                    <div class="chart-container w-full chart-h-sm"> 
-                        <canvas id="errorAwarenessChart" role="img" aria-label="AI 오류 인식도 파이차트"></canvas>
-                    </div>
-                    <p class="mt-3 text-sm text-gray-700"><strong>결과:</strong> ‘인식함/잘 인식함’ 응답이 61.1%, 전혀 인식 안함 응답은 5.6%.</p>
-                </div>
-
-                <!-- 문항 3: Fact Checking -->
-                <div class="flex flex-col items-center text-center">
-                    <h4 class="font-semibold text-lg mb-1">문항 3: 사실 확인 빈도</h4>
-                    <p class="text-xs text-gray-500 mb-3">(N=18)</p>
-                    <div class="chart-container w-full chart-h-sm"> 
-                        <canvas id="factCheckingChart" role="img" aria-label="AI 사실 확인 빈도 파이차트"></canvas>
-                    </div>
-                    <p class="mt-3 text-sm text-gray-700"><strong>결과:</strong> ‘가끔/항상 확인’ 응답이 61.1%, 보통 이상 포함하면 88.9%가 검토 태도 가짐.</p>
-                </div>
+        <section id="research-plan" class="info-card">
+            <h2 class="section-title">Ⅱ. 조사 계획</h2>
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-yellow-200 p-4 rounded-md"><h3 class="font-semibold text-primary-yellow mb-1"><span class="research-emoji">🗓️</span> 조사 기간</h3><p>2025년 5월 12일 (월) ~ 5월 16일 (금)</p></div>
+                <div class="bg-orange-200 p-4 rounded-md"><h3 class="font-semibold text-primary-yellow mb-1"><span class="research-emoji">🧑‍🎓</span> 조사 대상</h3><p>서울 미림마이스터고등학교 소프트웨어과 1학년 4반 학생 18명 <br>(남 10명, 여 8명, <strong class="text-secondary-orange">신수아, 홍성재 학생 인터뷰 참여</strong>)</p></div>
+                <div class="bg-orange-200 p-4 rounded-md"><h3 class="font-semibold text-primary-yellow mb-1"><span class="research-emoji">📊</span> 조사 방법</h3><p>양적 설문조사와 질적 인터뷰 병행</p></div>
+                <div class="bg-yellow-200 p-4 rounded-md"><h3 class="font-semibold text-primary-yellow mb-1"><span class="research-emoji">📝</span> 설문 및 인터뷰 설계</h3><p>설문: Google Forms (5점 척도/8문항)</p><p>인터뷰: ClovaNote 사용, 개별 심층 인터뷰(2명)</p></div>
             </div>
-        </article>
+        </section>
 
-        <article class="info-card">
-            <h3 class="sub-section-title">2. 인터뷰 요약</h3>
-            <div class="space-y-8">
-                <!-- 신수아 학생 인터뷰 -->
-                <div class="interview-card">
-                    <div class="interview-main-content">
-                        <div class="interview-photo-wrapper">
-                            <img src="src/수아하윤인터뷰.jpg" onerror="this.onerror=null; this.src='https://placehold.co/400x400/FF9800/FFFFFF?text=신수아+학생+인터뷰';" alt="신수아 학생 인터뷰 사진" class="interview-photo">
+        <section id="research-results" class="space-y-8">
+            <h2 class="text-3xl font-bold text-center text-primary-yellow mb-8">Ⅲ. 조사 결과</h2>
+            <article class="info-card">
+                <h3 class="sub-section-title">1. 설문조사 분석</h3>
+                <p class="mb-6">총 18명 대상 설문</p>
+                
+                <div class="survey-charts-grid"> <!-- 가로 나열을 위한 새로운 클래스 -->
+                    <!-- 문항 1: AI Usage -->
+                    <div class="flex flex-col items-center text-center">
+                        <h4 class="font-semibold text-lg mb-1">문항 1: 생성형 AI 주요 사용 용도</h4>
+                        <p class="text-xs text-gray-500 mb-3">(복수응답, N=18)</p>
+                        <div class="chart-container w-full chart-h-sm"> 
+                            <canvas id="aiUsageChart" role="img" aria-label="AI 사용 용도 설문 차트"></canvas>
                         </div>
-                        <div class="interview-text-content space-y-4">
-                            <div class="student-name"><h3 class="font-bold text-3xl text-secondary-orange">1) 신수아</h3></div> <!-- 이름 크기 키움 -->
-                            <div>
-                                <p class="font-semibold text-xl text-gray-800"><strong>주제 :</strong> AI 활용에 대한 감정적 거리감과 윤리적 태도</p> <!-- 주제 크기 키움 -->
-                                <p class="font-semibold text-xl text-gray-600 mt-1"><strong>핵심 키워드 :</strong></p> <!-- 핵심 키워드 설명 크기 키움 -->
-                                <div class="flex flex-wrap gap-2 mt-1">
-                                    <span class="keyword-tag">허무함</span>
-                                    <span class="keyword-tag">괴리감</span>
-                                    <span class="keyword-tag">베끼기</span>
-                                    <span class="keyword-tag">실력</span>
-                                    <span class="keyword-tag">비리</span>
-                                    <span class="keyword-tag">말투</span>
-                                    <span class="keyword-tag">수정</span>
-                                    <span class="keyword-tag">참고</span>
+                        <p class="mt-3 text-sm text-gray-700"><strong>결과:</strong> 학습자료 이해(55.6%) 가장 높고, 코딩 도움(50%), 아이디어(44.4%) 순.</p>
+                    </div>
+
+                    <!-- 문항 2: Error Awareness -->
+                    <div class="flex flex-col items-center text-center">
+                        <h4 class="font-semibold text-lg mb-1">문항 2: AI 오류 인식</h4>
+                        <p class="text-xs text-gray-500 mb-3">(N=18)</p>
+                        <div class="chart-container w-full chart-h-sm"> 
+                            <canvas id="errorAwarenessChart" role="img" aria-label="AI 오류 인식도 파이차트"></canvas>
+                        </div>
+                        <p class="mt-3 text-sm text-gray-700"><strong>결과:</strong> ‘인식함/잘 인식함’ 응답이 61.1%, 전혀 인식 안함 응답은 5.6%.</p>
+                    </div>
+
+                    <!-- 문항 3: Fact Checking -->
+                    <div class="flex flex-col items-center text-center">
+                        <h4 class="font-semibold text-lg mb-1">문항 3: 사실 확인 빈도</h4>
+                        <p class="text-xs text-gray-500 mb-3">(N=18)</p>
+                        <div class="chart-container w-full chart-h-sm"> 
+                            <canvas id="factCheckingChart" role="img" aria-label="AI 사실 확인 빈도 파이차트"></canvas>
+                        </div>
+                        <p class="mt-3 text-sm text-gray-700"><strong>결과:</strong> ‘가끔/항상 확인’ 응답이 61.1%, 보통 이상 포함하면 88.9%가 검토 태도 가짐.</p>
+                    </div>
+                </div>
+            </article>
+
+            <article class="info-card">
+                <h3 class="sub-section-title">2. 인터뷰 요약</h3>
+                <div class="space-y-8">
+                    <!-- 신수아 학생 인터뷰 -->
+                    <div class="interview-card">
+                        <div class="interview-main-content">
+                            <div class="interview-photo-wrapper">
+                                <img src="src/수아하윤인터뷰.jpg" onerror="this.onerror=null; this.src='https://placehold.co/400x400/FF9800/FFFFFF?text=신수아+학생+인터뷰';" alt="신수아 학생 인터뷰 사진" class="interview-photo">
+                            </div>
+                            <div class="interview-text-content space-y-4">
+                                <div class="student-name"><h3 class="font-bold text-3xl text-secondary-orange">1) 신수아</h3></div> <!-- 이름 크기 키움 -->
+                                <div>
+                                    <p class="font-semibold text-xl text-gray-800"><strong>주제 :</strong> AI 활용에 대한 감정적 거리감과 윤리적 태도</p> <!-- 주제 크기 키움 -->
+                                    <p class="font-semibold text-xl text-gray-600 mt-1"><strong>핵심 키워드 :</strong></p> <!-- 핵심 키워드 설명 크기 키움 -->
+                                    <div class="flex flex-wrap gap-2 mt-1">
+                                        <span class="keyword-tag">허무함</span>
+                                        <span class="keyword-tag">괴리감</span>
+                                        <span class="keyword-tag">베끼기</span>
+                                        <span class="keyword-tag">실력</span>
+                                        <span class="keyword-tag">비리</span>
+                                        <span class="keyword-tag">말투</span>
+                                        <span class="keyword-tag">수정</span>
+                                        <span class="keyword-tag">참고</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <!-- 요약 부분과 워드클라우드 사진을 함께 감싸는 새로운 컨테이너 -->
-                    <div class="summary-wordcloud-container flex flex-col md:flex-row md:items-start w-full gap-4 mt-4">
-                        <div class="summary-section md:w-1/2">
-                            <p class="font-semibold text-gray-800 text-xl"><strong>요약 :</strong></p> <!-- 요약 제목 크기 키움 -->
-                            <ul class="list-disc list-inside text-gray-700 mt-1 space-y-1">
-                                <li>AI의 빠른 정답 제시에 허무함과 ‘내 작업이 아니다’는 괴리감을 느낀다.</li>
-                                <li>유료 AI 서비스로 점수를 얻는 건 ‘비리’처럼 느껴져 거부감을 갖는다.</li>
-                                <li>AI의 어색한 말투 때문에 문장을 직접 수정하거나 제외하기도 한다.</li>
-                                <li>AI는 참고만 하고, 최종 결과물은 스스로 만들려는 태도를 지닌다.</li>
-                            </ul>
-                        </div>
-                        <div class="md:w-1/2 flex justify-center items-center">
-                            <img src="src/스크린샷 2025-06-10 145645.png" onerror="this.onerror=null; this.src='https://placehold.co/600x350/FFB44E/FFFFFF?text=신수아+워드클라우드';" alt="신수아 워드클라우드" class="word-cloud-img">
-                        </div>
-                    </div>
-                </div>
-                <!-- 홍성재 학생 인터뷰 -->
-                <div class="interview-card">
-                    <div class="interview-main-content">
-                        <div class="interview-photo-wrapper">
-                            <img src="src/성재인터뷰.jpg" onerror="this.onerror=null; this.src='https://placehold.co/400x400/FF9800/FFFFFF?text=홍성재+학생+인터뷰';" alt="홍성재 학생 인터뷰 사진" class="interview-photo">
-                        </div>
-                        <div class="interview-text-content space-y-4">
-                            <div class="student-name"><h3 class="font-bold text-3xl text-secondary-orange">2) 홍성재</h3></div> <!-- 이름 크기 키움 -->
-                            <div>
-                                <p class="font-semibold text-xl text-gray-800"><strong>주제 :</strong> AI 사용 후의 자기 주도성과 감정적 영향</p> <!-- 주제 크기 키움 -->
-                                <p class="font-semibold text-xl text-gray-800 mt-1"><strong>핵심 키워드:</strong></p> <!-- 핵심 키워드 설명 크기 키움 -->
-                                <div class="flex flex-wrap gap-2 mt-1">
-                                    <span class="keyword-tag">참고</span>
-                                    <span class="keyword-tag">과제</span>
-                                    <span class="keyword-tag">무력감</span>
-                                    <span class="keyword-tag">자존감</span>
-                                    <span class="keyword-tag">수정</span>
-                                    <span class="keyword-tag">점수 하락</span>
-                                    <span class="keyword-tag">인간 vs AI</span>
-                                </div>
+                        <!-- 요약 부분과 워드클라우드 사진을 함께 감싸는 새로운 컨테이너 -->
+                        <div class="summary-wordcloud-container flex flex-col md:flex-row md:items-start w-full gap-4 mt-4">
+                            <div class="summary-section md:w-1/2">
+                                <p class="font-semibold text-gray-800 text-xl"><strong>요약 :</strong></p> <!-- 요약 제목 크기 키움 -->
+                                <ul class="list-disc list-inside text-gray-700 mt-1 space-y-1">
+                                    <li>AI의 빠른 정답 제시에 허무함과 ‘내 작업이 아니다’는 괴리감을 느낀다.</li>
+                                    <li>유료 AI 서비스로 점수를 얻는 건 ‘비리’처럼 느껴져 거부감을 갖는다.</li>
+                                    <li>AI의 어색한 말투 때문에 문장을 직접 수정하거나 제외하기도 한다.</li>
+                                    <li>AI는 참고만 하고, 최종 결과물은 스스로 만들려는 태도를 지닌다.</li>
+                                </ul>
+                            </div>
+                            <div class="md:w-1/2 flex justify-center items-center">
+                                <img src="src/스크린샷 2025-06-10 145645.png" onerror="this.onerror=null; this.src='https://placehold.co/600x350/FFB44E/FFFFFF?text=신수아+워드클라우드';" alt="신수아 워드클라우드" class="word-cloud-img">
                             </div>
                         </div>
                     </div>
-                    <!-- 요약 부분과 워드클라우드 사진을 함께 감싸는 새로운 컨테이너 -->
-                    <div class="summary-wordcloud-container flex flex-col md:flex-row md:items-start w-full gap-4 mt-4">
-                        <div class="summary-section md:w-1/2">
-                            <p class="font-semibold text-gray-800 text-xl"><strong>요약 :</strong></p> <!-- 요약 제목 크기 키움 -->
-                            <ul class="list-disc list-inside text-gray-700 mt-1 space-y-1">
-                                <li>AI를 참고하되 결과물은 직접 만들려 노력한다.</li>
-                                <li>과제를 끝냈을 땐 기쁘지만, 자기 주도성 부족에 대한 무력감도 있었다.</li>
-                                <li>AI 문체를 수정했지만 점수가 낮아지는 부작용을 겪었다.</li>
-                                <li>AI와 자신을 비교하며 <strong class="text-accent-blue">자존감이나 정체성에 영향</strong>을 받거나 흔들리는 감정도 경험했다.</li>
-                            </ul>
+                    <!-- 홍성재 학생 인터뷰 -->
+                    <div class="interview-card">
+                        <div class="interview-main-content">
+                            <div class="interview-photo-wrapper">
+                                <img src="src/성재인터뷰.jpg" onerror="this.onerror=null; this.src='https://placehold.co/400x400/FF9800/FFFFFF?text=홍성재+학생+인터뷰';" alt="홍성재 학생 인터뷰 사진" class="interview-photo">
+                            </div>
+                            <div class="interview-text-content space-y-4">
+                                <div class="student-name"><h3 class="font-bold text-3xl text-secondary-orange">2) 홍성재</h3></div> <!-- 이름 크기 키움 -->
+                                <div>
+                                    <p class="font-semibold text-xl text-gray-800"><strong>주제 :</strong> AI 사용 후의 자기 주도성과 감정적 영향</p> <!-- 주제 크기 키움 -->
+                                    <p class="font-semibold text-xl text-gray-800 mt-1"><strong>핵심 키워드:</strong></p> <!-- 핵심 키워드 설명 크기 키움 -->
+                                    <div class="flex flex-wrap gap-2 mt-1">
+                                        <span class="keyword-tag">참고</span>
+                                        <span class="keyword-tag">과제</span>
+                                        <span class="keyword-tag">무력감</span>
+                                        <span class="keyword-tag">자존감</span>
+                                        <span class="keyword-tag">수정</span>
+                                        <span class="keyword-tag">점수 하락</span>
+                                        <span class="keyword-tag">인간 vs AI</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="md:w-1/2 flex justify-center items-center">
-                            <img src="src/스크린샷 2025-06-10 145657.png" onerror="this.onerror=null; this.src='https://placehold.co/600x350/FFB44E/FFFFFF?text=홍성재+워드클라우드';" alt="홍성재 워드클라우드" class="word-cloud-img">
+                        <!-- 요약 부분과 워드클라우드 사진을 함께 감싸는 새로운 컨테이너 -->
+                        <div class="summary-wordcloud-container flex flex-col md:flex-row md:items-start w-full gap-4 mt-4">
+                            <div class="summary-section md:w-1/2">
+                                <p class="font-semibold text-gray-800 text-xl"><strong>요약 :</strong></p> <!-- 요약 제목 크기 키움 -->
+                                <ul class="list-disc list-inside text-gray-700 mt-1 space-y-1">
+                                    <li>AI를 참고하되 결과물은 직접 만들려 노력한다.</li>
+                                    <li>과제를 끝냈을 땐 기쁘지만, 자기 주도성 부족에 대한 무력감도 있었다.</li>
+                                    <li>AI 문체를 수정했지만 점수가 낮아지는 부작용을 겪었다.</li>
+                                    <li>AI와 자신을 비교하며 <strong class="text-accent-blue">자존감이나 정체성에 영향</strong>을 받거나 흔들리는 감정도 경험했다.</li>
+                                </ul>
+                            </div>
+                            <div class="md:w-1/2 flex justify-center items-center">
+                                <img src="src/스크린샷 2025-06-10 145657.png" onerror="this.onerror=null; this.src='https://placehold.co/600x350/FFB44E/FFFFFF?text=홍성재+워드클라우드';" alt="홍성재 워드클라우드" class="word-cloud-img">
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </article>
-    </section>
+            </article>
+        </section>
 
-    <section id="conclusion" class="info-card">
-        <h2 class="section-title">Ⅳ. 결론 및 시사점</h2>
-        <p>학생들은 AI를 정답 제공이 아닌 학습 보조 수단으로 활용하려는 태도를 보였다. 이는 디지털 리터러시의 기초라 할 수 있다.</p>
-        <p>그러나 AI의 언어 표현이 자신의 말투와 부합하지 않을 때 <strong class="text-accent-blue">자존감이나 정체성에 영향</strong>을 줄 수 있어, 심리적 지원이 필요합니다.</p>
-        <p>특히 “이것이 내 생각인가, AI의 제안인가?”라는 질문을 자주 던진 점은 기술 활용뿐 아니라 <strong class="text-accent-blue">윤리적·자기 주도적 사고능력의 중요성을 시사</strong>합니다.</p>
-    </section>
+        <section id="conclusion" class="info-card">
+            <h2 class="section-title">Ⅳ. 결론 및 시사점</h2>
+            <p>학생들은 AI를 정답 제공이 아닌 학습 보조 수단으로 활용하려는 태도를 보였다. 이는 디지털 리터러시의 기초라 할 수 있다.</p>
+            <p>그러나 AI의 언어 표현이 자신의 말투와 부합하지 않을 때 <strong class="text-accent-blue">자존감이나 정체성에 영향</strong>을 줄 수 있어, 심리적 지원이 필요합니다.</p>
+            <p>특히 “이것이 내 생각인가, AI의 제안인가?”라는 질문을 자주 던진 점은 기술 활용뿐 아니라 <strong class="text-accent-blue">윤리적·자기 주도적 사고능력의 중요성을 시사</strong>합니다.</p>
+        </section>
 
-    <section id="findings-suggestions" class="grid md:grid-cols-2 gap-6">
-        <div class="info-card">
+        <section id="findings" class="info-card"> <!-- ID 변경: findings-suggestions에서 findings로 분리 -->
             <h2 class="section-title">Ⅴ. 주요 발견점</h2>
             <div>
                 <ul class="custom-list text-base space-y-1">
@@ -373,115 +430,154 @@
                     <li>AI는 사고와 정체성 형성에 영향을 미치는 인지 조력자 역할.</li>
                 </ul>
             </div>
-        </div>
-        <div class="info-card">
-            <h2 class="section-title">제언 및 다짐</h2>
+        </section>
+
+        <section id="suggestions" class="info-card"> <!-- 새로운 섹션으로 분리 및 ID 변경 -->
+            <h2 class="section-title">Ⅵ. 제언 및 다짐</h2> <!-- 로마 숫자 추가 -->
             <div>
-                <ul class="custom-list text-base space-y-1">
+                <ul class="pledge-list text-base space-y-1">
                     <li>AI 활용 교육은 정보 검증, 표절 방지, 정체성 확립, 심리 안정까지 아우르는 통합 교육으로 확대되어야 합니다.</li>
                     <li>교사와 학생이 함께 AI 가이드라인을 만들고 실습·토론 중심의 프로그램을 구축해야 합니다.</li>
                     <li>학생으로서 AI를 복사 도구가 아닌 사고를 자극하는 조력자로 사용하며, 항상 주체적인 학습자가 되겠습니다.</li>
                 </ul>
             </div>
-        </div>
-    </section>
-    <section id="reflections" class="info-card">
-        <h2 class="section-title">느낀점</h2>
-        <div class="space-y-4 text-gray-700">
-            <p>이번 조사를 통해 생성형 AI는 단순한 정보 제공 도구를 넘어, 사용 방식에 따라 유익하거나 해로울 수 있다는 점을 깨달았다. 설문과 인터뷰 결과, 많은 학생들이 AI를 공부나 과제에 <strong class="text-accent-blue">유용하게 활용</strong>하고 있었지만, 일부는 답을 복사하거나 <strong class="text-accent-blue">AI에 과도하게 의존</strong>하는 모습도 보였다.</p>
-            <p> "AI는 도구일 뿐이고, 내가 중심이 되어야 한다"는 인터뷰 응답은 특히 인상 깊었고, AI를 똑똑하게 활용하는 주체는 결국 인간이라는 사실을 다시금 느꼈다.</p>
-            <p>앞으로는 AI를 무비판적으로 받아들이기보다는, <strong class="text-accent-blue">윤리의식과 주체성을 가지고 비판적</strong>으로 활용해야 한다는 태도를 갖게 되었고, ‘스스로 사고하고 AI는 참고용’이라는 원칙을 지켜나갈 것이다.</p>
-        </div>
-    </section>
+        </section>
 
-    <section id="references" class="info-card">
-        <h2 class="section-title">Ⅵ. 참고 자료</h2>
-        <ul class="list-disc list-inside text-base space-y-1">
-            <li>Google Forms 설문(2025.05.12~16)</li>
-            <li>Google Gemini</li>
-            <li>ChatGPT 질의응답 로그</li>
-            <li>ClovaNote 인터뷰 녹취 및 정리</li>
-            <li>김형주 (2024). “AI와 교육 윤리”, 한국교육정보연구소 논문집</li>
-            <li>천재교과서 공통국어2 (202쪽)</li>
-        </ul>
-    </section>
+        <section id="reflections" class="info-card">
+            <h2 class="section-title">Ⅶ. 느낀점</h2> <!-- 로마 숫자 추가 -->
+            <div class="space-y-4 text-gray-700">
+                <p>이번 조사를 통해 생성형 AI는 단순한 정보 제공 도구를 넘어, 사용 방식에 따라 유익하거나 해로울 수 있다는 점을 깨달았다. 설문과 인터뷰 결과, 많은 학생들이 AI를 공부나 과제에 <strong class="text-accent-blue">유용하게 활용</strong>하고 있었지만, 일부는 답을 복사하거나 <strong class="text-accent-blue">AI에 과도하게 의존</strong>하는 모습도 보였다.</p>
+                <p> "AI는 도구일 뿐이고, 내가 중심이 되어야 한다"는 인터뷰 응답은 특히 인상 깊었고, AI를 똑똑하게 활용하는 주체는 결국 인간이라는 사실을 다시금 느꼈다.</p>
+                <p>앞으로는 AI를 무비판적으로 받아들이기보다는, <strong class="text-accent-blue">윤리의식과 주체성을 가지고 비판적</strong>으로 활용해야 한다는 태도를 갖게 되었고, ‘스스로 사고하고 AI는 참고용’이라는 원칙을 지켜나갈 것이다.</p>
+            </div>
+        </section>
 
-</main>
+        <section id="references" class="info-card">
+            <h2 class="section-title">Ⅷ. 참고 자료</h2> <!-- 로마 숫자 변경 -->
+            <ul class="list-disc list-inside text-base space-y-1">
+                <li>Google Forms 설문(2025.05.12~16)</li>
+                <li>Google Gemini</li>
+                <li>ChatGPT 질의응답 로그</li>
+                <li>ClovaNote 인터뷰 녹취 및 정리</li>
+                <li>김형주 (2024). “AI와 교육 윤리”, 한국교육정보연구소 논문집</li>
+                <li>천재교과서 공통국어2 (202쪽)</li>
+            </ul>
+        </section>
 
-<footer class="bg-gray-700 text-white text-center p-6 mt-12 rounded-t-lg">
-    <p>&copy; 2025 미림마이스터고 1학년 4반 3조. All rights reserved.</p>
-    <p class="text-sm text-gray-400 mt-1">본 인포그래픽은 조사 보고서 내용을 기반으로 AI가 생성하였습니다.</p>
-</footer>
+    </main>
+
+    <footer class="bg-gray-700 text-white text-center p-6 mt-12 rounded-t-lg">
+        <p>&copy; 2025 미림마이스터고 1학년 4반 3조. All rights reserved.</p>
+        <p class="text-sm text-gray-400 mt-1">본 인포그래픽은 조사 보고서 내용을 기반으로 AI가 생성하였습니다.</p>
+    </footer>
+</div>
 
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-    const commonOpts = {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: { tooltip: { backgroundColor: 'rgba(0,0,0,0.7)' } },
-        scales: { y: { beginAtZero: true } }
-    };
+    document.addEventListener('DOMContentLoaded', () => {
+        const startPage = document.getElementById('start-page');
+        const mainContent = document.getElementById('main-content');
+        const startButton = document.getElementById('startButton');
 
-    // Chart 1: AI Usage - 다양한 색상 조합
-    new Chart(document.getElementById('aiUsageChart').getContext('2d'), {
-        type: 'bar',
-        data: {
-            labels: ['학습자료', '코딩 도움', '아이디어', '글쓰기', '이미지', '번역', '고민'],
-            datasets: [{
-                label: '응답 수',
-                data: [10, 9, 8, 6, 4, 3, 3],
-                backgroundColor: [
-                    '#4A90E2', // 밝은 파랑
-                    '#50E3C2', // 민트
-                    '#7ED321', // 연두
-                    '#F5A623', // 주황
-                    '#BD10E0', // 보라
-                    '#9B59B6', // 연보라
-                    '#4A4A4A'  // 진회색
-                ]
-            }]
-        },
-        options: { ...commonOpts, scales: { y: { beginAtZero: true, ticks: { stepSize: 2 } } } }
-    });
+        startButton.addEventListener('click', () => {
+            startPage.style.display = 'none'; // 시작 페이지 숨기기
+            mainContent.style.display = 'block'; // 메인 콘텐츠 보이기
+            initializeCharts(); // 차트 초기화 함수 호출
+        });
 
-    // Chart 2: Error Awareness - 다양한 색상 조합
-    new Chart(document.getElementById('errorAwarenessChart').getContext('2d'), {
-        type: 'pie',
-        data: {
-            labels: ['전혀','인식 못함','보통','인식함','잘 인식함'],
-            datasets: [{
-                data: [0, 1, 6, 6, 5],
-                backgroundColor: [
-                    '#FF6347', // 토마토
-                    '#4A90E2', // 밝은 파랑
-                    '#50E3C2', // 민트
-                    '#7ED321', // 연두
-                    '#BD10E0'  // 보라
-                ]
-            }]
-        },
-        options: commonOpts
-    });
+        // 차트 초기화 함수 (버튼 클릭 후 호출되도록 분리)
+        function initializeCharts() {
+            const commonOpts = {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { 
+                    legend: {
+                        labels: {
+                            color: '#263238' // 범례 텍스트 색상
+                        }
+                    },
+                    tooltip: { 
+                        backgroundColor: 'rgba(0,0,0,0.7)',
+                        titleColor: '#FFFFFF',
+                        bodyColor: '#FFFFFF'
+                    } 
+                },
+                scales: { 
+                    y: { 
+                        beginAtZero: true,
+                        ticks: { color: '#263238' }, // y축 눈금 색상
+                        grid: { color: '#E0E0E0' }    // y축 그리드 라인 색상
+                    },
+                    x: {
+                        ticks: { color: '#263238' }, // x축 눈금 색상
+                        grid: { display: false }      // x축 그리드 라인 숨기기
+                    }
+                }
+            };
 
-    // Chart 3: Fact Checking - 다양한 색상 조합
-    new Chart(document.getElementById('factCheckingChart').getContext('2d'), {
-        type: 'pie',
-        data: {
-            labels: ['전혀','별로','보통','가끔','항상'],
-            datasets: [{
-                data: [1, 1, 5, 9, 2],
-                backgroundColor: [
-                    '#FF4500', // 오렌지 레드
-                    '#4A90E2', // 밝은 파랑
-                    '#50E3C2', // 민트
-                    '#7ED321', // 연두
-                    '#BD10E0'  // 보라
-                ]
-            }]
-        },
-        options: commonOpts
+            // Chart 1: AI Usage - 명확히 구분되는 파스텔톤 색상 팔레트
+            const barChartPalette = [
+                '#FFC107', // Primary Yellow
+                '#A7C7E7', // Pastel Blue
+                '#A8D8C7', // Pastel Green
+                '#FFB3A7', // Pastel Coral
+                '#D7BDE2', // Pastel Lavender
+                '#FFDAB9', // Pastel Peach
+                '#B0BEC5'  // Pastel Grey
+            ];
+
+            new Chart(document.getElementById('aiUsageChart').getContext('2d'), {
+                type: 'bar',
+                data: {
+                    labels: ['학습자료', '코딩 도움', '아이디어', '글쓰기', '이미지', '번역', '고민'],
+                    datasets: [{
+                        label: '응답 수',
+                        data: [10, 9, 8, 6, 4, 3, 3],
+                        backgroundColor: barChartPalette
+                    }]
+                },
+                options: { 
+                    ...commonOpts, 
+                    scales: { 
+                        ...commonOpts.scales,
+                        y: { ...commonOpts.scales.y, ticks: { stepSize: 2 } } 
+                    } 
+                }
+            });
+
+            // Chart 2 & 3: 파이 차트용 색상 팔레트
+            const pieChartPalette = [
+                '#E0E0E0', // Light Grey
+                '#FFD54F', // Light Yellow
+                '#A8D8C7', // Pastel Green
+                '#A7C7E7', // Pastel Blue
+                '#FF9800'  // Orange (Point Color)
+            ];
+
+            new Chart(document.getElementById('errorAwarenessChart').getContext('2d'), {
+                type: 'pie',
+                data: {
+                    labels: ['전혀','인식 못함','보통','인식함','잘 인식함'],
+                    datasets: [{
+                        data: [0, 1, 6, 6, 5],
+                        backgroundColor: pieChartPalette
+                    }]
+                },
+                options: commonOpts
+            });
+
+            new Chart(document.getElementById('factCheckingChart').getContext('2d'), {
+                type: 'pie',
+                data: {
+                    labels: ['전혀','별로','보통','가끔','항상'],
+                    datasets: [{
+                        data: [1, 1, 5, 9, 2],
+                        backgroundColor: pieChartPalette
+                    }]
+                },
+                options: commonOpts
+            });
+        }
     });
-});
 </script>
 
 </body>
