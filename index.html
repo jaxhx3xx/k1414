@@ -80,7 +80,7 @@
             width: 100%; /* 부모 너비에 맞춰 꽉 채움 */
             height: auto; /* 비율 유지 */
             max-width: 300px; /* 모바일 최대 사이즈 */
-            object-fit: cover;
+            object-fit: cover; /* 인터뷰 사진도 가로 꽉 채우도록 cover 사용 */
             border-radius: .5rem;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
@@ -106,14 +106,12 @@
         }
 
         /* 워드클라우드 이미지 스타일 */
-        .word-cloud-image {
+        .word-cloud-img { /* 클래스 이름을 word-cloud-img로 변경 */
             width: 100%; /* 가로 공간을 꽉 채움 */
-            height: auto;
-            /* max-width: 600px;  이 제한을 제거하여 부모 너비에 맞춤 */
-            object-fit: contain;
+            height: auto; /* 높이는 자동으로 */
+            object-fit: cover; /* 비율 유지하며 컨테이너를 덮도록 변경 */
             border-radius: .5rem;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            margin-top: 1rem; /* 내용 아래 워드클라우드 시작 간격 */
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15); /* 그림자 효과 더 강하게 */
         }
 
         /* 설문조사 분석 섹션의 텍스트 크기 조정 (기존 대비 상대적으로 작게 유지) */
@@ -143,7 +141,7 @@
             .interview-photo {
                 width: 100%; /* 래퍼의 100%를 채움 */
                 height: auto; /* 텍스트 높이에 비례하도록 auto 설정 */
-                object-fit: contain; /* 비율 유지하며 포함하도록 변경 */
+                object-fit: cover; /* 비율 유지하며 포함하도록 변경 */
                 max-width: none; /* 데스크톱에서 max-width 제한 해제 */
             }
             .interview-text-content {
@@ -152,6 +150,19 @@
             }
             .student-name {
                 justify-content: flex-start; /* 데스크톱에서는 이름 왼쪽 정렬 */
+            }
+            /* 요약 섹션과 워드클라우드를 가로로 배치 */
+            .summary-wordcloud-container {
+                flex-direction: row;
+                align-items: flex-start;
+            }
+            .summary-section {
+                width: 50%;
+                margin-top: 0; /* 부모 컨테이너가 gap을 처리하므로 제거 */
+            }
+            .word-cloud-img {
+                width: 100%; /* 부모의 1/2 너비에 꽉 차도록 */
+                height: auto;
             }
         }
         /* 설문조사 분석: 강제로 3열 그리드 적용 및 가로 스크롤 허용 */
@@ -164,6 +175,29 @@
         }
         .survey-charts-grid > div {
             flex-shrink: 0; /* 내용이 줄어들지 않도록 */
+        }
+
+        /* 핵심 키워드 태그 스타일 */
+        .keyword-tag {
+            display: inline-block;
+            background-color: #FFECB3; /* 연한 노랑/오렌지 배경 */
+            color: #263238; /* 어두운 텍스트 색상 */
+            padding: 0.4rem 0.8rem;
+            border-radius: 9999px; /* 완전한 라운드 */
+            font-size: 1.2rem; 
+            font-weight: 500;
+            white-space: nowrap; /* 줄바꿈 방지 */
+        }
+
+        /* 새로운 요약 섹션 스타일 */
+        .summary-section {
+            width: 100%; /* 부모 컨테이너 너비에 맞춤 */
+            text-align: left; /* 텍스트 왼쪽 정렬 */
+            margin-top: 1.5rem; /* 모바일에서 위쪽 간격 추가 */
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+    
         }
     </style>
 </head>
@@ -246,23 +280,38 @@
                             <img src="src/수아하윤인터뷰.jpg" onerror="this.onerror=null; this.src='https://placehold.co/400x400/FF9800/FFFFFF?text=신수아+학생+인터뷰';" alt="신수아 학생 인터뷰 사진" class="interview-photo">
                         </div>
                         <div class="interview-text-content space-y-4">
-                            <div class="student-name"><h4 class="font-bold text-xl text-secondary-orange">신수아</h4></div>
+                            <div class="student-name"><h3 class="font-bold text-3xl text-secondary-orange">1) 신수아</h3></div> <!-- 이름 크기 키움 -->
                             <div>
-                                <p class="font-semibold text-gray-800">주제: AI 활용에 대한 감정적 거리감과 윤리적 태도</p>
-                                <p class="text-sm text-gray-600 mt-1"><strong class="font-semibold">핵심 키워드:</strong> 허무함, 괴리감, 베끼기, 실력, 비리, 말투, 수정, 참고</p>
-                            </div>
-                            <div>
-                                <p class="font-semibold text-gray-800"> 요약:</p>
-                                <ul class="list-disc list-inside text-gray-700 mt-1 space-y-1">
-                                    <li>AI의 빠른 정답 제시에 허무함과 ‘내 작업이 아니다’는 괴리감을 느낀다.</li>
-                                    <li>유료 AI 서비스로 점수를 얻는 건 ‘비리’처럼 느껴져 거부감을 갖는다.</li>
-                                    <li>AI의 어색한 말투 때문에 문장을 직접 수정하거나 제외하기도 한다.</li>
-                                    <li>AI는 참고만 하고, 최종 결과물은 스스로 만들려는 태도를 지닌다.</li>
-                                </ul>
+                                <p class="font-semibold text-xl text-gray-800"><strong>주제 :</strong> AI 활용에 대한 감정적 거리감과 윤리적 태도</p> <!-- 주제 크기 키움 -->
+                                <p class="font-semibold text-xl text-gray-600 mt-1"><strong>핵심 키워드 :</strong></p> <!-- 핵심 키워드 설명 크기 키움 -->
+                                <div class="flex flex-wrap gap-2 mt-1">
+                                    <span class="keyword-tag">허무함</span>
+                                    <span class="keyword-tag">괴리감</span>
+                                    <span class="keyword-tag">베끼기</span>
+                                    <span class="keyword-tag">실력</span>
+                                    <span class="keyword-tag">비리</span>
+                                    <span class="keyword-tag">말투</span>
+                                    <span class="keyword-tag">수정</span>
+                                    <span class="keyword-tag">참고</span>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <img src="src/스크린샷 2025-06-10 145645.png" onerror="this.onerror=null; this.src='https://placehold.co/600x350/FFB44E/FFFFFF?text=신수아+워드클라우드';" alt="신수아 워드클라우드" class="word-cloud-image">
+                    <!-- 요약 부분과 워드클라우드 사진을 함께 감싸는 새로운 컨테이너 -->
+                    <div class="summary-wordcloud-container flex flex-col md:flex-row md:items-start w-full gap-4 mt-4">
+                        <div class="summary-section md:w-1/2">
+                            <p class="font-semibold text-gray-800 text-xl"><strong>요약 :</strong></p> <!-- 요약 제목 크기 키움 -->
+                            <ul class="list-disc list-inside text-gray-700 mt-1 space-y-1">
+                                <li>AI의 빠른 정답 제시에 허무함과 ‘내 작업이 아니다’는 괴리감을 느낀다.</li>
+                                <li>유료 AI 서비스로 점수를 얻는 건 ‘비리’처럼 느껴져 거부감을 갖는다.</li>
+                                <li>AI의 어색한 말투 때문에 문장을 직접 수정하거나 제외하기도 한다.</li>
+                                <li>AI는 참고만 하고, 최종 결과물은 스스로 만들려는 태도를 지닌다.</li>
+                            </ul>
+                        </div>
+                        <div class="md:w-1/2 flex justify-center items-center">
+                            <img src="src/스크린샷 2025-06-10 145645.png" onerror="this.onerror=null; this.src='https://placehold.co/600x350/FFB44E/FFFFFF?text=신수아+워드클라우드';" alt="신수아 워드클라우드" class="word-cloud-img">
+                        </div>
+                    </div>
                 </div>
                 <!-- 홍성재 학생 인터뷰 -->
                 <div class="interview-card">
@@ -271,23 +320,37 @@
                             <img src="src/성재인터뷰.jpg" onerror="this.onerror=null; this.src='https://placehold.co/400x400/FF9800/FFFFFF?text=홍성재+학생+인터뷰';" alt="홍성재 학생 인터뷰 사진" class="interview-photo">
                         </div>
                         <div class="interview-text-content space-y-4">
-                            <div class="student-name"><h4 class="font-bold text-xl text-secondary-orange">홍성재</h4></div>
+                            <div class="student-name"><h3 class="font-bold text-3xl text-secondary-orange">2) 홍성재</h3></div> <!-- 이름 크기 키움 -->
                             <div>
-                                <p class="font-semibold text-gray-800">주제: AI 사용 후의 자기 주도성과 감정적 영향</p>
-                                <p class="text-sm text-gray-600 mt-1"><strong class="font-semibold">핵심 키워드:</strong> 참고, 과제, 무력감, 자존감, 수정, 점수 하락, 인간 vs AI</p>
-                            </div>
-                            <div>
-                                <p class="font-semibold text-gray-800">요약:</p>
-                                <ul class="list-disc list-inside text-gray-700 mt-1 space-y-1">
-                                    <li>AI를 참고하되 결과물은 직접 만들려 노력한다.</li>
-                                    <li>과제를 끝냈을 땐 기쁘지만, 자기 주도성 부족에 대한 무력감도 있었다.</li>
-                                    <li>AI 문체를 수정했지만 점수가 낮아지는 부작용을 겪었다.</li>
-                                    <li>AI와 자신을 비교하며 <strong class="text-accent-blue">자존감이나 정체성에 영향</strong>을 받거나 흔들리는 감정도 경험했다.</li>
-                                </ul>
+                                <p class="font-semibold text-xl text-gray-800"><strong>주제 :</strong> AI 사용 후의 자기 주도성과 감정적 영향</p> <!-- 주제 크기 키움 -->
+                                <p class="font-semibold text-xl text-gray-800 mt-1"><strong>핵심 키워드:</strong></p> <!-- 핵심 키워드 설명 크기 키움 -->
+                                <div class="flex flex-wrap gap-2 mt-1">
+                                    <span class="keyword-tag">참고</span>
+                                    <span class="keyword-tag">과제</span>
+                                    <span class="keyword-tag">무력감</span>
+                                    <span class="keyword-tag">자존감</span>
+                                    <span class="keyword-tag">수정</span>
+                                    <span class="keyword-tag">점수 하락</span>
+                                    <span class="keyword-tag">인간 vs AI</span>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <img src="src/스크린샷 2025-06-10 145657.png" onerror="this.onerror=null; this.src='https://placehold.co/600x350/FFB44E/FFFFFF?text=홍성재+워드클라우드';" alt="홍성재 워드클라우드" class="word-cloud-image">
+                    <!-- 요약 부분과 워드클라우드 사진을 함께 감싸는 새로운 컨테이너 -->
+                    <div class="summary-wordcloud-container flex flex-col md:flex-row md:items-start w-full gap-4 mt-4">
+                        <div class="summary-section md:w-1/2">
+                            <p class="font-semibold text-gray-800 text-xl"><strong>요약 :</strong></p> <!-- 요약 제목 크기 키움 -->
+                            <ul class="list-disc list-inside text-gray-700 mt-1 space-y-1">
+                                <li>AI를 참고하되 결과물은 직접 만들려 노력한다.</li>
+                                <li>과제를 끝냈을 땐 기쁘지만, 자기 주도성 부족에 대한 무력감도 있었다.</li>
+                                <li>AI 문체를 수정했지만 점수가 낮아지는 부작용을 겪었다.</li>
+                                <li>AI와 자신을 비교하며 <strong class="text-accent-blue">자존감이나 정체성에 영향</strong>을 받거나 흔들리는 감정도 경험했다.</li>
+                            </ul>
+                        </div>
+                        <div class="md:w-1/2 flex justify-center items-center">
+                            <img src="src/스크린샷 2025-06-10 145657.png" onerror="this.onerror=null; this.src='https://placehold.co/600x350/FFB44E/FFFFFF?text=홍성재+워드클라우드';" alt="홍성재 워드클라우드" class="word-cloud-img">
+                        </div>
+                    </div>
                 </div>
             </div>
         </article>
